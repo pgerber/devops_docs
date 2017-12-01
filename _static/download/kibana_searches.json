@@ -1,0 +1,67 @@
+[
+  {
+    "_id": "Nginx",
+    "_type": "search",
+    "_source": {
+      "title": "Nginx",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "status",
+        "method",
+        "url",
+        "request_time",
+        "client_addr"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"kubernetes.container_name\",\"value\":\"nginx\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"kubernetes.container_name\":{\"query\":\"nginx\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Nice",
+    "_type": "search",
+    "_source": {
+      "title": "Nice",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level_name",
+        "message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"kubernetes.container_name\",\"negate\":false,\"value\":\"nice\"},\"query\":{\"match\":{\"kubernetes.container_name\":{\"query\":\"nice\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"level_name\",\"negate\":true,\"value\":\"DEBUG\"},\"query\":{\"match\":{\"level_name\":{\"query\":\"DEBUG\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"level_name\",\"negate\":true,\"value\":\"INFO\"},\"query\":{\"match\":{\"level_name\":{\"query\":\"INFO\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"level_name\",\"negate\":true,\"value\":\"WARN\"},\"query\":{\"match\":{\"level_name\":{\"query\":\"WARN\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"level_name\",\"negate\":true,\"value\":\"ERROR\"},\"query\":{\"match\":{\"level_name\":{\"query\":\"ERROR\",\"type\":\"phrase\"}}}}],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Solr",
+    "_type": "search",
+    "_source": {
+      "title": "Solr",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.toco-nice-master.87617c03-b4d8-11e7-b6e3-fa163ed95dac.*\",\"key\":\"kubernetes.container_name\",\"value\":\"solr\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"kubernetes.container_name\":{\"query\":\"solr\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  }
+]
