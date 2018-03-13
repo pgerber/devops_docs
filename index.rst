@@ -3,7 +3,6 @@
    :maxdepth: 2
 
    framework/index
-   devops/index
    knowledge_base/index
 
 Indices and tables
