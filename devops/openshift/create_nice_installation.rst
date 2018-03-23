@@ -161,12 +161,12 @@ Step by Step Instructions
 
 #. Issue an SSL Certificate
 
-    Issue a SSL certificate for **${CUSTOMER}**.tocco.ch which is created by the template. See :ref:`issue-ssl-certificate`
+    Issue a SSL certificate for **${INSTALLATION}**.tocco.ch which is created by the template. See :ref:`issue-ssl-certificate`
     for instructions.
 
 #. Add additional Routes / Hostnames if Needed
 
-    See :ref:`add-route`
+    ${INSTALLATION}.tocco.ch is automatically created. If you need more routes see :ref:`add-route`.
 
 .. important::
 
