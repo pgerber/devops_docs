@@ -91,6 +91,8 @@ Since we won't have any control over the DNS server, you'll have to communicate 
 :ref:`what-dns-records-are-needed`, so they can ensure the entries are created.
 
 
+.. _verify-dns-records:
+
 Verify DNS Records
 ------------------
 

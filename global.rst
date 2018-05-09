@@ -21,3 +21,7 @@
 
 .. _VSHN Control: https://control.vshn.net
 .. _Requests and Limits: https://docs.openshift.org/latest/admin_guide/overcommit.html#requests-and-limits
+.. _VSHN Status Page: https://status.vshn.net
+.. _Appuio Status Page: https://status.appuio.net
+.. _Cloudscale Status Page: https://cloudscale-status.net
+.. _Appuio Logging: https://logging.appuio.ch
