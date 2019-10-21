@@ -1,7 +1,5 @@
-.. _s3_architecture:
-
-Architecture
-============
+S3 Architecture
+===============
 
 An overlay bucket (`tocco-dev-nice-overlay`) is provided for the development environment.
 This prevents developers from writing data to the production bucket during development.
@@ -15,7 +13,7 @@ Example:
 Each developer has a dedicated s3 user. Example: `dev-mawu`
 
 The installation user is the owner of the bucket and has all access rights.
-All the dev users have only read access on the installation buckets. This access is given by s3 policies and acl's. Here you see how to set the policies for an bucket: :ref:`s3_policy`.
+All the dev users have only read access on the installation buckets. This access is given by s3 policies and acl's. Here you see how to set the policies for an bucket: :doc:`/devops/s3/policy`.
 
 The access keys of an installation are set in the `s3.properties` file in the customer folder.
 
@@ -25,7 +23,7 @@ For the development environment the connection information of the buckets is con
      aws_access_key_id=XXXXXXXXXXXXXXXXXXXX
      aws_secret_access_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-You can get the access keys for a developer :ref:`here <get_s3_acces_key>`.
+See :ref:`s3-obtain-key` for details on how to obtain a developers keys.
 
 .. note::
 

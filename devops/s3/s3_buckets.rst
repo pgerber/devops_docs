@@ -1,55 +1,64 @@
-.. _s3-bucket:
-
 S3 Buckets
 ==========
 
-
-Naming conventions for S3
+Naming Conventions for S3
 --------------------------
-
-S3 User-Name: **nice-[clientname]**
-S3 Bucket-Name : **tocco-[S3 User-Name]**
-
-
-
-
-To create buckets, access the control panel at ``https://control.cloudscale.ch/objects``
+================= ============================
+ S3 user name      nice-**${customer}**
+ S3 bucket name    tocco-nice-**${customer}**
+================= ============================
 
 
-.. figure:: resources/s3_cloudscale_webclient.png
+Access the Web Interface
+------------------------
+
+S3 users and buckets can be managed via the web interface available at https://control.cloudscale.ch/objects.
+
 
 Create a new S3 user
 --------------------
 
-Press the button ``Create a new Object User`` at the top-right.
-For the name, use the convention listed above.
+Press the button *Create a new Object User* at the top-right. The *Display Name* is the name of the S3 user,
+choose it accordingly to the naming convention above.
+
+.. figure:: resources/s3_cloudscale_webclient.png
 
 .. figure:: resources/create_new_user.png
 
-A new user can easily be created via curl.
-This is especially useful when many users need to be created.
-
+Alternatively, users can be created via API. Here an example using ``curl``:
 
 .. parsed-literal::
 
-    curl -i -H 'Authorization: Bearer **${MY_ACCESS_TOKEN}**' -F display_name=**${NEW_USERNAME}** https://api.cloudscale.ch/v1/objects-users;
+        curl -i -H 'Authorization: Bearer **${MY_ACCESS_TOKEN}**' -F display_name=\ **${NEW_USERNAME}** https\://api.cloudscale.ch/v1/objects-users
 
-.. _get_s3_acces_key:
+.. tip::
 
-Check the access-key and security-Key
--------------------------------------
+    API tokens can be managed `here <https://control.cloudscale.ch/user/api-tokens>`__.
 
-Press the blue button in the upper right corner. There is a blue panel on which the S3 Keys are stored.
+.. tip::
+
+    API documentation can be found `here <https://www.cloudscale.ch/en/api/v1#objects-users>`__
+
+
+.. _s3-obtain-key:
+
+Obtain the Access and Security Keys
+-----------------------------------
+
+The *Access Key* and *Secret Key* values correspond to the ``s3.main.accessKeyId`` and
+``s3.main.secretAccessKey``, respectively, within the ``s3.properties`` file.
 
 .. figure:: resources/check_keys.png
 
-Create new S3-Bucket
+.. todo::
+
+    Link to S3 properties description.
+
+
+Create new S3 Bucket
 --------------------
 
-press the button ``add a bucket`` and insert a bucket name.
+On the same page, press the button *Add a bucket* and pick a name in adherence to the
+convention introduced above.
 
 .. figure:: resources/add_bucket.png
-
-.. warning::
-
-    After you created a bucket for a nice installation you need to set the correct access policies on the bucket: :ref:`s3_policy`. Otherwise the developers will not be able to acces the bucket.

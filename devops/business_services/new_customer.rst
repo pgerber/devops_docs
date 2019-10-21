@@ -75,9 +75,7 @@ Create a Solr Core
 Create S3 Bucket
 ^^^^^^^^^^^^^^^^
 
-You only need to create a bucket if the customer will be setup using S3.
-
-:ref:`s3-bucket`
+You only need to create a bucket if the customer will be setup using S3. See :doc:`../s3/s3_buckets`.
 
 Create in OpenShift
 --------------------
