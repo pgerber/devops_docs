@@ -6,20 +6,11 @@ Delete System on "Nine.ch"
 
 #. Remove monitoring (Nagios).
 
-#. Remove in the installation from``~tocco/manager/etc/manager.xml``.
+#. Remove the installation from ``~tocco/manager/etc/manager.xml``.
 
 #. Reload config with mgrctl restart.
 
 #. Remove DNS (https://cockpit.nine.ch).
-
-#. Rename the databases::
-
-    ALTER DATABASE nice2_${INSTALLATION} RENAME TO del_nice2_${INSTALLATION}
-    ALTER DATABASE nice2_${INSTALLATION}_history RENAME TO del_nice2_${INSTALLATION}_history
-
-#. Wait at least one day for the automatic backup to run.
-
-#. Now you can delete the renamed databases ``del_...``.
 
 #. Remove the project of installation in Teamcity.
 
@@ -34,33 +25,76 @@ Delete System on "Nine.ch"
          and exists(relInstallation)
          and not exists(relInstallation where relInstallation_status.unique_id != "obsolete")
 
-#. Delete the Customer's Maven module from the Nice2-Git repository (if there are no other installations that require the Customer module)
+#. Delete the customer's Maven module from the Nice2 Git repository (if there are no other installations that require the Customer module)
 
 #. Remove configuration from ``/etc/nginx/sites-enabled/*.conf`` and reload nginx (``nginx -s reload``)
 
 #. Remove Let's Encrypt certificate configuration on app03 at ``/etc/letsencrypt/renewal/*.conf``
 
+#. Remove installation directory
 
+   On app server::
+
+       rm -rf ~/nice2/${INSTALLATION}/
+
+#. Remove Solr index
+
+   Only required when *solr_server* is set in *config.yml*.
+
+   Obtain password to access Solr::
+
+       cd ${ANSIBLE_GIT_REPO}/tocco
+       ansible-vault view secrets2.yml |grep solr
+
+   On solr server (e.g. solr2.tocco.cust.vshn.net):
+
+   .. parsed-literal::
+
+       curl 'https\://localhost:8983/solr/admin/cores?action=UNLOAD&deleteInstanceDir=true&core=nice-\ **${INSTALLATION}** ' --insecure -u tocco -p
+
+#. Drop databases:
+
+   .. warning::
+
+       Consider waiting a few days before removing the databases to ensure
+       the final states of the databases have been backed up.
+
+   .. code::
+
+       DROP DATABASE nice2_${INSTALLATION};
+       DROP DATABASE nice2_${INSTALLATION}_history;
+
+#. Remove S3 bucket
+
+   .. warning::
+
+       Consider waiting a few days before removing the S3 bucket to ensure
+       the final state of the S3 bucket has been backed up.
+
+   **Only do this if there is no other installation left for the customer.** Buckets
+   are shared among all installations of a customer.
+
+   .. code::
+
+       s3cmd rm -rf s3://tocco-nice-${CUSTOMER}
+       s3cmd rb s3://tocco-nice-${CUSTOMER}
 
 Delete Client-System on "VSHN"
 ==============================
 
-#. Remove monitoring (VSHN). Remove configuration in `common.yml`_
+#. Remove installation from Ansible repo, remove it from *tocco/config.yml* and apply the change::
 
-#. Remove DNS
+       cd ${ANSIBLE_GIT_REPO}/tocco
+       ansible-playbook playbook.yml -t monitoring
 
-#. Cloudscale: scale the project to be deleted to 0 instances (``oc scale --replicas 0 dc/nice``).
+#. Remove DNS (cockpit.nine.ch)
 
-#. Remove the database from `the puppet config <https://git.vshn.net/tocco/tocco_hieradata/blob/master/database/master.yaml>`__
+   Check for other domains hosted by us, remove them too::
 
-#. Rename the databases::
+       oc project toco-nice-${INSTALLATION}
+       oc get route
 
-    ALTER DATABASE nice_${INSTALLATION} RENAME TO del_nice_${INSTALLATION}
-    ALTER DATABASE nice_${INSTALLATION} RENAME TO del_nice_${INSTALLATION}
-
-#. Wait at least one day for the automatic backup to run.
-
-#. Now you can delete the renamed databases ``del_....``.
+#. Remove the OpenShift project (https://control.vshn.net/appuio/projects)
 
 #. Remove the project of the installation in Teamcity.
 
@@ -77,7 +111,45 @@ Delete Client-System on "VSHN"
 
 #. Delete the Customer's Maven module from the Nice2-Git repository (if there are no other installations that require the Customer module)
 
-#. Remove Solr index by changing *state* to *absent* in `solr.yml`_.
+#. Remove Solr index
+
+   Obtain password to access Solr::
+
+       cd ${ANSIBLE_GIT_REPO}/tocco
+       ansible-vault view secrets2.yml |grep solr
+
+   On solr server (e.g. solr2.tocco.cust.vshn.net):
+
+   .. parsed-literal::
+
+       curl 'https\://localhost:8983/solr/admin/cores?action=UNLOAD&deleteInstanceDir=true&core=nice-\ **${INSTALLATION}** ' --insecure -u tocco -p
+
+#. Drop databases:
+
+   .. warning::
+
+       Consider waiting a few days before removing the databases to ensure
+       the final states of the databases have been backed up.
+
+   .. code::
+
+       DROP DATABASE nice_${INSTALLATION};
+       DROP DATABASE nice_${INSTALLATION}_history;
+
+#. Remove S3 bucket
+
+   .. warning::
+
+       Consider waiting a few days before removing the S3 bucket to ensure
+       the final state of the S3 bucket has been backed up.
+
+   **Only do this if there is no other installation left for the customer.** Buckets
+   are shared among all installations of a customer.
+
+   .. code::
+
+       s3cmd rm -rf s3://tocco-nice-${INSTALLATION}
+       s3cmd rb s3://tocco-nice-${INSTALLATION}
 
 
 .. _common.yml: https://git.vshn.net/tocco/tocco_hieradata/blob/master/common.yaml
